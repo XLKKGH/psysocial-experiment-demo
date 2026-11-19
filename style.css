@@ -1,0 +1,254 @@
+:root {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #171717;
+    background: #f1f0f4;
+    --purple: #6850a6
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0
+}
+
+.phone {
+    width: 100%;
+    max-width: 470px;
+    min-height: 100dvh;
+    background: white;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 30px #0001
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 22px;
+    border-bottom: 1px solid #eee;
+    font-size: 19px
+}
+
+#screen {
+    padding: 20px;
+    flex: 1
+}
+
+footer {
+    padding: 15px;
+    text-align: center;
+    font-size: 11px;
+    color: #666;
+    border-top: 1px solid #eee
+}
+
+h1 {
+    font-size: 24px;
+    line-height: 1.25;
+    margin: 7px 0 16px
+}
+
+p {
+    line-height: 1.5
+}
+
+small,
+.muted {
+    color: #60606a;
+    font-size: 13px
+}
+
+.progress {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 5px
+}
+
+.track {
+    height: 6px;
+    background: #e9e4f1;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 24px
+}
+
+.track div {
+    height: 100%;
+    background: var(--purple)
+}
+
+.user {
+    max-width: 85%;
+    margin: 12px 0 24px auto;
+    background: #f1f1f1;
+    border-radius: 18px;
+    padding: 13px 15px;
+    line-height: 1.4
+}
+
+.assistant-label {
+    font-weight: 650;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin: 8px 0
+}
+
+.avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #171717;
+    color: white;
+    font-size: 15px
+}
+
+.answer {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 8px 0 18px
+}
+
+.answer.card {
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 12px
+}
+
+.icons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: #646464;
+    font-size: 19px;
+    letter-spacing: 6px;
+    margin: 4px 0 24px
+}
+
+.icons img {
+    width: 16px;
+    height: 16px;
+}
+
+.question {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 24px 0 10px
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0
+}
+
+legend {
+    padding: 0;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 20px 0 10px
+}
+
+label.choice {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 43px;
+    margin: 8px 0;
+    padding: 9px 12px;
+    border: 1px solid #bcb7c5;
+    border-radius: 24px;
+    color: var(--purple);
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer
+}
+
+label.choice input {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    accent-color: var(--purple)
+}
+
+label.choice:has(input:checked) {
+    background: #eee8fa;
+    border-color: var(--purple);
+    font-weight: 650
+}
+
+button {
+    width: 100%;
+    font: inherit;
+    font-weight: 600;
+    border-radius: 24px;
+    border: 0;
+    padding: 13px 18px;
+    margin: 16px 0 2px;
+    background: var(--purple);
+    color: white;
+    cursor: pointer
+}
+
+button.secondary {
+    background: #f2eff7;
+    color: var(--purple)
+}
+
+button:disabled {
+    opacity: .45;
+    cursor: not-allowed
+}
+
+.navigator {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px
+}
+
+input[type=number] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 8px;
+    font: inherit
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #9c80e3;
+    outline-offset: 2px
+}
+
+.notice {
+    background: #f4f0fb;
+    padding: 13px;
+    border-radius: 12px;
+    line-height: 1.5
+}
+
+.correction {
+    border-bottom: 1px solid #eee;
+    padding: 8px 0;
+    font-size: 14px;
+    line-height: 1.5
+}
+
+@media(min-width:600px) {
+    .phone {
+        min-height: calc(100dvh - 32px);
+        margin: 16px auto;
+        border-radius: 24px;
+        overflow: hidden
+    }
+}
