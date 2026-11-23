@@ -1,17 +1,102 @@
-// Draft stimuli transcribed from Figma. Two mismatches corrected provisionally (Q2 and Q6).
+// Stimuli: 24 statements, each shown as its own single-statement AI conversation.
+// Per TA feedback, every AI answer contains exactly ONE claim (true or false),
+// mirroring the original study, where each headline was a separate story.
+//
+// Counterbalancing: statements are split into two sets by `version`.
+//   Version A participants are exposed to the 12 "A" statements; Version B to the 12 "B" statements.
+//   Everyone rates all 24 in the assessment stage.
+// Each set = 6 true + 6 false, 4 per topic. Statements that share a subject (`pair`)
+// stay in the same set, so a "novel" statement is never about a subject the participant just saw.
+//
 // Review all factual labels and exact wording before recruitment.
-const QUESTIONS = [
-    { id: 'Q1', version: 'A', topic: 'Animals / Nature', prompt: 'Why does my cat open her mouth when she smells certain scents?', claims: [['S01', true, 'Cats use the flehmen response to detect chemical signals such as pheromones.'], ['S02', false, 'Cats only show the flehmen response when smelling scents left by other cats.', 'Cats can also display the flehmen response in response to other odors.']] },
-    { id: 'Q2', version: 'A', topic: 'Animals / Nature', prompt: 'What are some interesting facts about octopuses?', claims: [['S03', false, 'Octopuses have iron-based blood, similar to humans.', 'Octopuses use copper-containing hemocyanin to transport oxygen.'], ['S04', true, 'Octopuses have three hearts.']] },
-    { id: 'Q3', version: 'B', topic: 'Animals / Nature', prompt: 'How do butterflies sense their surroundings?', claims: [['S05', true, 'Butterflies have taste receptors on their feet.'], ['S06', false, 'Butterflies primarily detect scents through sensory receptors on their wings.', 'Butterflies primarily detect odors using their antennae.']] },
-    { id: 'Q4', version: 'B', topic: 'Animals / Nature', prompt: 'What are some unique characteristics of sea turtles?', claims: [['S07', false, 'Sea turtles can retract their heads into their shells for protection.', 'Sea turtles cannot retract their heads into their shells.'], ['S08', true, "Sea turtles use Earth's magnetic field to help navigate the ocean."]] },
-    { id: 'Q5', version: 'A', topic: 'Science / Environment', prompt: 'What are some surprising facts about our solar system?', claims: [['S09', true, 'Venus takes longer to rotate once on its axis than to orbit the Sun.'], ['S10', false, 'Saturn is the only planet in our solar system with rings.', 'Jupiter, Uranus and Neptune also have rings.']] },
-    { id: 'Q6', version: 'A', topic: 'Science / Environment', prompt: 'How is the ocean physically different from freshwater or air?', claims: [['S11', false, 'Sound travels more slowly through seawater than through air.', 'Sound travels faster through seawater than through air.'], ['S12', true, 'Ocean water freezes at a lower temperature than freshwater.']] },
-    { id: 'Q7', version: 'B', topic: 'Science / Environment', prompt: "What are some interesting facts about the Earth's geography?", claims: [['S13', true, "Glaciers and ice sheets contain most of Earth's freshwater."], ['S14', false, 'The Himalayas form the longest mountain range on Earth.', 'The mid-ocean ridge is longer than the Himalayas.']] },
-    { id: 'Q8', version: 'B', topic: 'Science / Environment', prompt: 'What are some things people might not know about the Moon?', claims: [['S15', false, 'The far side of the Moon never receives direct sunlight.', 'The far side receives sunlight during the lunar day.'], ['S16', true, 'Water ice exists in permanently shadowed craters on the Moon.']] },
-    { id: 'Q9', version: 'A', topic: 'Technology', prompt: 'How do QR codes work?', claims: [['S17', true, 'QR codes can sometimes be scanned even when part of their pattern is damaged.'], ['S18', false, 'QR codes must be printed in black and white to be readable.', 'Other colors can work if there is sufficient contrast.']] },
-    { id: 'Q10', version: 'A', topic: 'Technology', prompt: 'How does Bluetooth technology connect devices wirelessly?', claims: [['S19', false, 'Bluetooth devices require a Wi-Fi connection to exchange data.', 'Bluetooth can exchange data independently of Wi-Fi.'], ['S20', true, 'Bluetooth technology operates using radio waves in the 2.4 GHz frequency band.']] },
-    { id: 'Q11', version: 'B', topic: 'Technology', prompt: 'How does GPS determine my location?', claims: [['S21', true, 'GPS receivers calculate their location using timing signals transmitted by satellites.'], ['S22', false, 'GPS satellites transmit digital street maps directly to smartphones.', 'GPS satellites transmit navigation and timing signals; map data comes from other sources.']] },
-    { id: 'Q12', version: 'B', topic: 'Technology', prompt: 'How are electronic book readers different from regular screens?', claims: [['S23', false, 'E Ink displays use a backlight behind the screen to produce images.', 'E Ink displays form images using reflective electronic ink; some devices have front lights.'], ['S24', true, 'E Ink displays can retain an image without consuming electricity.']] }
+const STATEMENTS = [
+    // ---------- Animals / Nature ----------
+    { id: 'S01', version: 'A', pair: 'P01', topic: 'Animals / Nature', truth: true,
+      prompt: 'Why does my cat open her mouth when she smells certain scents?',
+      text: 'Cats use the flehmen response to detect chemical signals such as pheromones.' },
+    { id: 'S02', version: 'A', pair: 'P01', topic: 'Animals / Nature', truth: false,
+      prompt: 'Do cats make that open-mouth face for any smell?',
+      text: 'Cats only show the flehmen response when smelling scents left by other cats.',
+      correction: 'Cats can also display the flehmen response in response to other odors.' },
+    { id: 'S03', version: 'A', pair: 'P02', topic: 'Animals / Nature', truth: false,
+      prompt: 'What kind of blood do octopuses have?',
+      text: 'Octopuses have iron-based blood, similar to humans.',
+      correction: 'Octopuses use copper-containing hemocyanin to transport oxygen.' },
+    { id: 'S04', version: 'A', pair: 'P02', topic: 'Animals / Nature', truth: true,
+      prompt: 'How many hearts does an octopus have?',
+      text: 'Octopuses have three hearts.' },
+    { id: 'S05', version: 'B', pair: 'P03', topic: 'Animals / Nature', truth: true,
+      prompt: 'How do butterflies taste their food?',
+      text: 'Butterflies have taste receptors on their feet.' },
+    { id: 'S06', version: 'B', pair: 'P03', topic: 'Animals / Nature', truth: false,
+      prompt: 'How do butterflies detect scents?',
+      text: 'Butterflies primarily detect scents through sensory receptors on their wings.',
+      correction: 'Butterflies primarily detect odors using their antennae.' },
+    { id: 'S07', version: 'B', pair: 'P04', topic: 'Animals / Nature', truth: false,
+      prompt: 'How do sea turtles protect themselves from predators?',
+      text: 'Sea turtles can retract their heads into their shells for protection.',
+      correction: 'Sea turtles cannot retract their heads into their shells.' },
+    { id: 'S08', version: 'B', pair: 'P04', topic: 'Animals / Nature', truth: true,
+      prompt: 'How do sea turtles find their way across the ocean?',
+      text: "Sea turtles use Earth's magnetic field to help navigate the ocean." },
+
+    // ---------- Science / Environment ----------
+    { id: 'S09', version: 'A', pair: 'P05', topic: 'Science / Environment', truth: true,
+      prompt: 'What is unusual about how Venus rotates?',
+      text: 'Venus takes longer to rotate once on its axis than to orbit the Sun.' },
+    { id: 'S10', version: 'A', pair: 'P05', topic: 'Science / Environment', truth: false,
+      prompt: 'Which planets in our solar system have rings?',
+      text: 'Saturn is the only planet in our solar system with rings.',
+      correction: 'Jupiter, Uranus and Neptune also have rings.' },
+    { id: 'S11', version: 'A', pair: 'P06', topic: 'Science / Environment', truth: false,
+      prompt: 'How does sound travel underwater compared with air?',
+      text: 'Sound travels more slowly through seawater than through air.',
+      correction: 'Sound travels faster through seawater than through air.' },
+    { id: 'S12', version: 'A', pair: 'P06', topic: 'Science / Environment', truth: true,
+      prompt: 'How does the freezing point of ocean water compare with freshwater?',
+      text: 'Ocean water freezes at a lower temperature than freshwater.' },
+    { id: 'S13', version: 'B', pair: 'P07', topic: 'Science / Environment', truth: true,
+      prompt: "Where is most of Earth's freshwater stored?",
+      text: "Glaciers and ice sheets contain most of Earth's freshwater." },
+    { id: 'S14', version: 'B', pair: 'P07', topic: 'Science / Environment', truth: false,
+      prompt: 'What is the longest mountain range on Earth?',
+      text: 'The Himalayas form the longest mountain range on Earth.',
+      correction: 'The mid-ocean ridge is far longer, and on land the Andes are longer than the Himalayas.' },
+    { id: 'S15', version: 'B', pair: 'P08', topic: 'Science / Environment', truth: false,
+      prompt: 'What is the far side of the Moon like?',
+      text: 'The far side of the Moon never receives direct sunlight.',
+      correction: 'The far side receives sunlight during the lunar day.' },
+    { id: 'S16', version: 'B', pair: 'P08', topic: 'Science / Environment', truth: true,
+      prompt: 'Is there any water on the Moon?',
+      text: 'Water ice exists in permanently shadowed craters on the Moon.' },
+
+    // ---------- Technology ----------
+    { id: 'S17', version: 'A', pair: 'P09', topic: 'Technology', truth: true,
+      prompt: 'What happens if part of a QR code is damaged?',
+      text: 'QR codes can sometimes be scanned even when part of their pattern is damaged.' },
+    { id: 'S18', version: 'A', pair: 'P09', topic: 'Technology', truth: false,
+      prompt: 'Can QR codes be printed in color?',
+      text: 'QR codes must be printed in black and white to be readable.',
+      correction: 'Other colors can work if there is sufficient contrast.' },
+    { id: 'S19', version: 'A', pair: 'P10', topic: 'Technology', truth: false,
+      prompt: 'How do Bluetooth devices exchange data?',
+      text: 'Bluetooth devices require a Wi-Fi connection to exchange data.',
+      correction: 'Bluetooth can exchange data independently of Wi-Fi.' },
+    { id: 'S20', version: 'A', pair: 'P10', topic: 'Technology', truth: true,
+      prompt: 'What radio frequency does Bluetooth use?',
+      text: 'Bluetooth technology operates using radio waves in the 2.4 GHz frequency band.' },
+    { id: 'S21', version: 'B', pair: 'P11', topic: 'Technology', truth: true,
+      prompt: 'How does GPS figure out my location?',
+      text: 'GPS receivers calculate their location using timing signals transmitted by satellites.' },
+    { id: 'S22', version: 'B', pair: 'P11', topic: 'Technology', truth: false,
+      prompt: 'Where does the map in my GPS app come from?',
+      text: 'GPS satellites transmit digital street maps directly to smartphones.',
+      correction: 'GPS satellites transmit navigation and timing signals; map data comes from other sources.' },
+    { id: 'S23', version: 'B', pair: 'P12', topic: 'Technology', truth: false,
+      prompt: 'How do e-ink readers display text?',
+      text: 'E Ink displays use a backlight behind the screen to produce images.',
+      correction: 'E Ink displays form images using reflective electronic ink; some devices add front lights.' },
+    { id: 'S24', version: 'B', pair: 'P12', topic: 'Technology', truth: true,
+      prompt: 'How much power does an e-ink screen use to keep showing a page?',
+      text: 'E Ink displays can retain an image without consuming electricity.' }
 ];
-const CLAIMS = QUESTIONS.flatMap(q => q.claims.map(([id, truth, text, correction]) => ({ id, truth, text, correction, topic: q.topic, version: q.version, question: q.id })));
